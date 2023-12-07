@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -7,7 +7,7 @@ class TaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
@@ -16,30 +16,25 @@ class TaskScreen extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:<Widget>  [
+        children: <Widget>[
           // ignore: avoid_unnecessary_containers
           Container(
             child: Padding(
-              padding:const EdgeInsets.only(
-                top: 60.0, 
-                left: 30.0, 
-                right: 30.0, 
-                bottom: 30.0
-              ),
-              child: Column( 
+              padding: const EdgeInsets.only(
+                  top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:<Widget> [
+                children: <Widget>[
                   // ignore: avoid_unnecessary_containers
-                    const CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 30.0,
-                    child: Icon(
-                      Icons.list, 
-                      color: Colors.lightBlueAccent,
-                    )
-                  ),
+                  const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 30.0,
+                      child: Icon(
+                        Icons.list,
+                        color: Colors.lightBlueAccent,
+                      )),
                   const SizedBox(height: 10.0),
-                   Text(
+                  Text(
                     'Todoey',
                     style: GoogleFonts.poppins(
                       color: Colors.white,
@@ -47,7 +42,7 @@ class TaskScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                   Text(
+                  Text(
                     '12 Tasks',
                     style: GoogleFonts.poppins(
                       color: Colors.white,
@@ -61,18 +56,61 @@ class TaskScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              decoration:const BoxDecoration(
+              child: Container(
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0)
-                )
-              ),
-            )
-          )
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0))),
+            child: ListView(
+              children: const <Widget>[
+                TaskTile(isChecked: true,),
+                TaskTile(isChecked: false,),
+              ],
+            ),
+          ))
         ],
       ),
     );
   }
-}    
+}
+
+
+class TaskTile extends StatefulWidget {
+  const TaskTile({Key? key, required this.isChecked}) : super(key: key);
+
+  final bool isChecked;
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _TaskTileState createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  late bool isChecked;
+
+  @override
+  void initState() {
+    super.initState();
+    isChecked = widget.isChecked;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      textColor: Colors.black,
+      title: const Text("This is a task."),
+      trailing: Checkbox(
+        fillColor: MaterialStateProperty.all(Colors.black), 
+        checkColor: Colors.white,
+        activeColor: Colors.black,
+        value: isChecked,
+        onChanged: (value) {
+          setState(() {
+            isChecked = value!;
+          });
+        },
+      ),
+    );
+  }
+}
