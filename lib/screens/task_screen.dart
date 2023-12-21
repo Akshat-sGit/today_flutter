@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todoey_flutter/screens/add_task_screen.dart'; 
 
 class TaskScreen extends StatelessWidget {
   static const String id = 'task_screen';
@@ -8,11 +9,14 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.orange[900],
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightBlueAccent,
-        child: const Icon(Icons.add),
-        onPressed: () {},
+        backgroundColor: Colors.grey[900],
+        child: Icon(Icons.add, color: Colors.orange[900]),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (context) => const AddTaskScreen());
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,12 +30,12 @@ class TaskScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   // ignore: avoid_unnecessary_containers
-                  const CircleAvatar(
-                      backgroundColor: Colors.white,
+                  CircleAvatar(
+                      backgroundColor: Colors.black,
                       radius: 30.0,
                       child: Icon(
                         Icons.list,
-                        color: Colors.lightBlueAccent,
+                        color: Colors.orange[900],
                       )),
                   const SizedBox(height: 10.0),
                   Text(
@@ -58,14 +62,18 @@ class TaskScreen extends StatelessWidget {
           Expanded(
               child: Container(
             decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Colors.black,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0))),
             child: ListView(
               children: const <Widget>[
-                TaskTile(isChecked: true,),
-                TaskTile(isChecked: false,),
+                TaskTile(
+                  isChecked: false,
+                ),
+                TaskTile(
+                  isChecked: false,
+                ),
               ],
             ),
           ))
@@ -74,7 +82,6 @@ class TaskScreen extends StatelessWidget {
     );
   }
 }
-
 
 class TaskTile extends StatefulWidget {
   const TaskTile({Key? key, required this.isChecked}) : super(key: key);
@@ -99,9 +106,12 @@ class _TaskTileState extends State<TaskTile> {
   Widget build(BuildContext context) {
     return ListTile(
       textColor: Colors.black,
-      title: const Text("This is a task."),
+      title: const Text(
+        "This is a task.",
+        style: TextStyle(color: Colors.white),
+      ),
       trailing: Checkbox(
-        fillColor: MaterialStateProperty.all(Colors.black), 
+        fillColor: MaterialStateProperty.all(Colors.black),
         checkColor: Colors.white,
         activeColor: Colors.black,
         value: isChecked,
