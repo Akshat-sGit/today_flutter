@@ -15,7 +15,14 @@ class TaskScreen extends StatelessWidget {
         child: Icon(Icons.add, color: Colors.orange[900]),
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => const AddTaskScreen());
+              context: context,isScrollControlled: true ,builder: (context) => SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: const AddTaskScreen(),
+                )
+                ),
+
+              );
         },
       ),
       body: Column(
@@ -39,7 +46,7 @@ class TaskScreen extends StatelessWidget {
                       )),
                   const SizedBox(height: 10.0),
                   Text(
-                    'Todoey',
+                    'To-do',
                     style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontSize: 50.0,
@@ -87,6 +94,7 @@ class TaskTile extends StatefulWidget {
   const TaskTile({Key? key, required this.isChecked}) : super(key: key);
 
   final bool isChecked;
+  
 
   @override
   // ignore: library_private_types_in_public_api
@@ -94,7 +102,7 @@ class TaskTile extends StatefulWidget {
 }
 
 class _TaskTileState extends State<TaskTile> {
-  late bool isChecked;
+  late bool isChecked = false;
 
   @override
   void initState() {
@@ -106,9 +114,12 @@ class _TaskTileState extends State<TaskTile> {
   Widget build(BuildContext context) {
     return ListTile(
       textColor: Colors.black,
-      title: const Text(
+      title: Text(
         "This is a task.",
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+          color: Colors.white, 
+          decoration: isChecked ?  TextDecoration.lineThrough : null, 
+        ),
       ),
       trailing: Checkbox(
         fillColor: MaterialStateProperty.all(Colors.black),
@@ -123,4 +134,4 @@ class _TaskTileState extends State<TaskTile> {
       ),
     );
   }
-}
+} 
