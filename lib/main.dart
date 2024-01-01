@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 import 'package:todoey_flutter/screens/task_screen.dart';
 
 void main() {
-  runApp(const Todoey());
+  runApp(const MyApp());
 }
 
-class Todoey extends StatelessWidget {
-  const Todoey({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            color: Colors.black54,
-            fontSize: 45.0,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
+    return ChangeNotifierProvider<TaskData>(
+      create: (context) => TaskData(),
+      child: const MaterialApp(
+        home: TasksScreen(),
       ),
-      initialRoute: TaskScreen.id,
-      routes: {
-        // all the routes added here
-        TaskScreen.id: (context) => const TaskScreen(),
-      },
     );
   }
 }
