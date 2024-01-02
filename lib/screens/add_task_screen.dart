@@ -8,15 +8,14 @@ class AddTaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
-      color:const Color(0xff757575),
+      color: const Color(0xff757575),
       child: Container(
-        padding:const EdgeInsets.all(20.0),
-        decoration:const BoxDecoration(
+        padding: const EdgeInsets.all(20.0),
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0),
+            topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
           ),
         ),
@@ -35,6 +34,7 @@ class AddTaskScreen extends StatelessWidget {
               autofocus: true,
               textAlign: TextAlign.center,
               onChanged: (newText) {
+                // Use newText for the task title if needed
               },
             ),
             ElevatedButton(
@@ -42,11 +42,11 @@ class AddTaskScreen extends StatelessWidget {
                 backgroundColor: Colors.lightBlueAccent,
               ),
               onPressed: () {
-                String newTaskTitle = '';
-                Provider.of<TaskData>(context).addTask(newTaskTitle);
+                String newTaskTitle = ''; // Fetch the new task title from TextField
+                Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
                 Navigator.pop(context);
               },
-              child:const Text(
+              child: const Text(
                 'Add',
                 style: TextStyle(
                   color: Colors.white,
