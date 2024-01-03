@@ -9,12 +9,12 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xff757575),
+      color: Colors.black,
       child: Container(
         padding: const EdgeInsets.all(20.0),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          color: Colors.orange[900],
+          borderRadius:const BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
           ),
@@ -27,7 +27,7 @@ class AddTaskScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30.0,
-                color: Colors.lightBlueAccent,
+                color: Colors.white,
               ),
             ),
             TextField(
@@ -39,7 +39,7 @@ class AddTaskScreen extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightBlueAccent,
+                backgroundColor: Colors.white,
               ),
               onPressed: () {
                 String newTaskTitle = ''; // Fetch the new task title from TextField
@@ -49,7 +49,7 @@ class AddTaskScreen extends StatelessWidget {
               child: const Text(
                 'Add',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
