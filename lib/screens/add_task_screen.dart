@@ -8,6 +8,7 @@ class AddTaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _controller = TextEditingController();
     return Container(
       color: Colors.black,
       child: Container(
@@ -33,8 +34,11 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              controller: _controller,
               onChanged: (newText) {
                 // Use newText for the task title if needed
+
+
               },
             ),
             ElevatedButton(
@@ -42,8 +46,9 @@ class AddTaskScreen extends StatelessWidget {
                 backgroundColor: Colors.white,
               ),
               onPressed: () {
-                String newTaskTitle = ''; // Fetch the new task title from TextField
+                String newTaskTitle = _controller.text; // Fetch the new task title from TextField
                 Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+                _controller.clear();
                 Navigator.pop(context);
               },
               child: const Text(
