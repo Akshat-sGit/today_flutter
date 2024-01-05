@@ -8,7 +8,7 @@ class AddTaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _controller = TextEditingController();
+    TextEditingController controller = TextEditingController();
     return Container(
       color: Colors.black,
       child: Container(
@@ -28,33 +28,43 @@ class AddTaskScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30.0,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             TextField(
+              decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+              ),
               autofocus: true,
               textAlign: TextAlign.center,
-              controller: _controller,
+              controller: controller,
               onChanged: (newText) {
                 // Use newText for the task title if needed
-
-
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-              ),
-              onPressed: () {
-                String newTaskTitle = _controller.text; // Fetch the new task title from TextField
-                Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
-                _controller.clear();
-                Navigator.pop(context);
-              },
-              child: const Text(
-                'Add',
-                style: TextStyle(
-                  color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 20.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+
+                  backgroundColor: Colors.black,
+                ),
+                onPressed: () {
+                  String newTaskTitle = controller.text; // Fetch the new task title from TextField
+                  Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+                  controller.clear();
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Add',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
